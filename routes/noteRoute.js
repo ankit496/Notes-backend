@@ -3,7 +3,7 @@ const {addTask, updateTask, deleteTask, fetchAllTasks,getTask}=require('../contr
 const validateUser=require('../middleware/validateUser')
 const router=express.Router()
 router.get("/",(req,res)=>{
-    return res.statusCode(200).json("hii")
+    return res.status(200).json("hii")
 })
 router.get("/getNote",validateUser,fetchAllTasks)
 router.post("/addNote",validateUser,addTask)
