@@ -13,6 +13,6 @@ const notesSchema=new mongoose.Schema({
         unique:true,
         required:true
     }
-})
+},{timestamps:true})
 const Notes=mongoose.model('Notes',notesSchema)
 module.exports=Notes

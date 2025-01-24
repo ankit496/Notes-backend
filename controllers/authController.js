@@ -13,7 +13,7 @@ const login=async(req,res)=>{
         const isValid=await bcrypt.compare(password,user.password)
         if(!isValid)
             return res.status(403).json({"message":"Invalid username or password"});
-        const token = jwt.sign({ userId: user._id }, JWT_SECRET,{ expiresIn: '7d' });
+        const token = jwt.sign({ userId: user._id ,username:username}, JWT_SECRET,{ expiresIn: '7d' });
         // req.user=token;
         res.status(200).json({success:true,token});
     } catch (error) {
@@ -30,7 +30,7 @@ const signup=async(req,res)=>{
         const hashedPassword=await bcrypt.hash(password,10);
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
-        const token = jwt.sign({ userId: newUser._id }, JWT_SECRET,{ expiresIn: '7d' });
+        const token = jwt.sign({ userId: newUser._id,username:username }, JWT_SECRET,{ expiresIn: '7d' });
         return res.status(200).json({success:true,token});
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
